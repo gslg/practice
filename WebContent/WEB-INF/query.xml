@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+	<!-- 表格的列 -->
+	<col>
+		<!-- 标题 -->
+		<title></title>
+		<!-- width 百分比 -->
+	</col>
+	<col>
+	
+	</col>
+</table>
