@@ -1,6 +1,10 @@
 package com.unit.servlet;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletConfig;
@@ -15,7 +19,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class MyServlet
  */
-@WebServlet("/MyServlet")
+@WebServlet(urlPatterns="/MyServlet",initParams={})
 public class MyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,12 +41,23 @@ public class MyServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		ServletContext sc = getServletContext();
 		
-		String path = sc.getContextPath();
+		String contextpath = sc.getContextPath();
+		String servletPath = request.getServletPath();
+		String pathInfo = request.getPathInfo();
+		System.out.println("index="+sc.getResource("/index.jsp"));
+		System.out.println("servletPath="+servletPath);
+		System.out.println("pathInfo="+pathInfo);
+		System.out.println("contextpath="+request.getContextPath());
+		System.out.println(sc.getRealPath(servletPath));
+		System.out.println(sc.getInitParameter("name"));
+		System.out.println("bufferedSize="+response.getBufferSize());
+		InputStream is =  sc.getResourceAsStream("/index.jsp");
+		
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("path", path);
+		request.setAttribute("path", contextpath);
 		
-		response.sendRedirect(path+"/login.jsp");
+		response.sendRedirect(contextpath+"/login.jsp");
 	}
 
 	/**
